@@ -3,7 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./doom";
 import Todo from "./todos.js";
 import UI from "./doom";
+import PrintTask from './printTask';
 
+let todoArr = [];
 
 const mainDiv = document.querySelector("#content");
 
@@ -31,9 +33,21 @@ mainDiv.innerHTML = `
 
 `;
 
+let tasksFromStorage = () => {
+  localStorage.setItem('myTasksStorage', JSON.stringify(todoArr));
+  todoArr = JSON.parse(localStorage.getItem('myTaksStorage'));
+  PrintTask(todoArr);
+}
 
 const form = document.getElementById("todoForm");
 
 //console.log(form);
 
-form.addEventListener('submit', UI.addTodo);
+form.addEventListener('submit', () => {
+  todoArr.push(UI.addTodo());
+  console.log(todoArr);
+  tasksFromStorage();
+});
+
+
+
