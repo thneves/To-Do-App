@@ -2,12 +2,14 @@ import './styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./doom";
 import UI from "./doom";
+import Store from './storage';
 
 let todoArr = [];
 
 const mainDiv = document.querySelector("#content");
-
+mainDiv.classList.add('d-flex');
 mainDiv.innerHTML = `
+<div id="projects" class="w-25"></div>
 
 <form action="/" class="d-flex flex-column w-25 mx-auto d-none" id="todoForm">
 <label for="title" class="form-label">Title</label>
@@ -29,7 +31,10 @@ mainDiv.innerHTML = `
 <input type="submit" id="submit-btn" value="Create a new To Do" class="btn btn-primary">
 </form> 
 
-<div id="todoCont"></div>
+
+
+
+<div id="todoCont" class="w-75"></div>
 
 `;
 
@@ -44,6 +49,13 @@ if (localStorage.getItem('myTasksStorage') === null) {
 // Events
 
 document.getElementById("todoForm").addEventListener("submit", UI.addTodo);
+
+document.getElementById('todoCont').addEventListener('click', (e) => {
+  if (e.target.classList.contains('delete-btn')) {
+    Store.removeTask(e.target.parentElement.firstChild.nextElementSibling.textContent, todoArr);
+    e.target.parentElement.parentElement.remove(); 
+ }
+});
 
 export default todoArr;
 

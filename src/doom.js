@@ -27,11 +27,11 @@ class UI {
           taskCard.innerHTML = 
           `
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">${task.title}</li>
-            <li class="list-group-item">${task.description}</li>
-            <li class="list-group-item">${task.dueDate}</li>
-            <li class="list-group-item">${task.priority}</li>
-            <button class="delete-btn btn-danger">X</button>
+            <li class="list-group-item"><strong>Task:</strong>${task.title}</li>
+            <li class="list-group-item"><strong>Description:</strong>${task.description}</li>
+            <li class="list-group-item"><strong>Due Date:</strong>${task.dueDate}</li>
+            <li class="list-group-item"><strong>Priority:</strong>${task.priority}</li>
+            <button class="delete-btn btn-danger">DONE</button>
           </ul>
           `;
           todoCont.appendChild(taskCard);
