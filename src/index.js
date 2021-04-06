@@ -33,13 +33,15 @@ mainDiv.innerHTML = `
 
 `;
 
-/*
-let tasksFromStorage = () => {
-  localStorage.setItem('myTasksStorage', JSON.stringify(todoArr));
-  todoArr = JSON.parse(localStorage.getItem('myTaksStorage'));
-  PrintTask(todoArr);
-}
-*/
+if (localStorage.getItem('myTasksStorage') === null) {
+    todoArr = [];
+  } else {
+    todoArr = JSON.parse(localStorage.getItem('myTasksStorage'));
+    UI.printTask(todoArr);
+  }
+
+
+// Events
 
 document.getElementById("todoForm").addEventListener("submit", UI.addTodo);
 

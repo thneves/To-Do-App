@@ -1,5 +1,6 @@
 import Todo from "./todos.js";
 import todoArr from "./index";
+import Store from "./storage"
 
 class UI {
     static addTodo(e) {
@@ -12,11 +13,12 @@ class UI {
         const priority = document.querySelector("#priority");
         let newTodo = new Todo(title.value, description.value, dueDate.value, priority.value);
         todoArr.push(newTodo);
-        UI.PrintTask(todoArr);
+        Store.tasksFromStorage(todoArr);
+        UI.printTask(todoArr);
         form.reset();
     }
 
-    static PrintTask(list) {
+    static printTask(list) {
         let todoCont = document.querySelector("#todoCont");
         todoCont.innerHTML = '';
         list.forEach((task) => {
