@@ -1,9 +1,7 @@
 import './styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./doom";
-import Todo from "./todos.js";
 import UI from "./doom";
-import PrintTask from './printTask';
 
 let todoArr = [];
 
@@ -31,23 +29,21 @@ mainDiv.innerHTML = `
 <input type="submit" id="submit-btn" value="Create a new To Do" class="btn btn-primary">
 </form> 
 
+<div id="todoCont"></div>
+
 `;
 
+/*
 let tasksFromStorage = () => {
   localStorage.setItem('myTasksStorage', JSON.stringify(todoArr));
   todoArr = JSON.parse(localStorage.getItem('myTaksStorage'));
   PrintTask(todoArr);
 }
+*/
 
-const form = document.getElementById("todoForm");
+document.getElementById("todoForm").addEventListener("submit", UI.addTodo);
 
-//console.log(form);
-
-form.addEventListener('submit', () => {
-  todoArr.push(UI.addTodo());
-  console.log(todoArr);
-  tasksFromStorage();
-});
+export default todoArr;
 
 
 
