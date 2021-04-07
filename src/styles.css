@@ -10,3 +10,7 @@
 .card {
   width: 300px;
 }
+
+.show {
+  display: block;
+}

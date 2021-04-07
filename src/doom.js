@@ -21,9 +21,13 @@ class UI {
           taskCard.innerHTML = 
           `
             <th scope="row">${index + 1}</th>
+            <td><button class="delete-btn btn-danger">DONE</button></td>
             <td>${task.title}</td>
             <td>${task.dueDate}</td>
-            <td><button class="delete-btn btn-danger">DONE</button></td>
+            <td id="${task.title}" class="none">${task.description}</td>
+            <td id="${task.title}" class="none">${task.priority}</td>
+            <td><button class="details-btn btn-secondary">See details</button></td>
+            
           `;
           todoBody.appendChild(taskCard);
         });

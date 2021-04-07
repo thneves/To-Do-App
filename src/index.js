@@ -6,6 +6,15 @@ import Store from './storage';
 
 let todoArr = [];
 
+function findIndex(title) {
+  todoArr.forEach((item) => {
+    if(item.title === title) {
+      document.getElementById(`${item.title}`).classList.toggle('none');
+    }
+  })
+}
+
+
 const mainDiv = document.querySelector("#content");
 mainDiv.classList.add('d-flex');
 mainDiv.innerHTML = `
@@ -16,6 +25,7 @@ mainDiv.innerHTML = `
       <thead>
         <tr>
           <th>#</th>
+          <th>Status</th>
           <th>Title</th>
           <th>Due Date</th>
         </tr>
@@ -43,7 +53,7 @@ if (localStorage.getItem('myTasksStorage') === null) {
 
 document.getElementById("todoForm").addEventListener("submit", (e) => {
   e.preventDefault();
-  todoArr.push(UI.addTodo());;
+  todoArr.push(UI.addTodo());
   Store.tasksFromStorage(todoArr);
   UI.printTask(todoArr);
 });
@@ -51,8 +61,19 @@ document.getElementById("todoForm").addEventListener("submit", (e) => {
 document.getElementById('todoCont').addEventListener('click', (e) => {
   if (e.target.classList.contains('delete-btn')) {
     //Store.removeTask(e.target.parentElement.firstChild.nextElementSibling.textContent, todoArr);
-    todoArr = Store.removeTask(e.target.parentElement.previousElementSibling.previousElementSibling.textContent, todoArr);
+    // console.log(e.target.parentElement.nextElementSibling.textContent)
+    todoArr = Store.removeTask(e.target.parentElement.nextElementSibling.textContent, todoArr);
     e.target.parentElement.parentElement.remove(); 
+ }
+});
+
+document.getElementById('todoCont').addEventListener('click', (e) => {
+  if (e.target.classList.contains('details-btn')) {
+    // console.log(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent)
+  //  console.log(findIndex(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent))
+  //  document.getElementById(`detail${findIndex(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent)}`).classList.toggle('none');
+  //  document.getElementById(`detail${index}`).classList.toggle('none');
+  findIndex(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent)
  }
 });
 
