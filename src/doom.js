@@ -1,6 +1,6 @@
 import Todo from "./todos.js";
-import todoArr from "./index";
-import Store from "./storage"
+import todoArr from "./index.js";
+import Store from "./storage.js"
 
 class UI {
     static addTodo(e) {

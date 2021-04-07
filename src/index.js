@@ -25,10 +25,11 @@ mainDiv.innerHTML = `
     </table>  
   </div>
   <button id="btnForm" class="btn btn-primary">Add +</button>
+  <button id="printArr" class="btn btn-primary">Print Array</button>
 </div>
 `;
 
-UI.printForm();
+
 
 if (localStorage.getItem('myTasksStorage') === null) {
     todoArr = [];
@@ -38,6 +39,8 @@ if (localStorage.getItem('myTasksStorage') === null) {
   }
 
 
+  UI.printForm();
+
 // Events
 
 document.getElementById("todoForm").addEventListener("submit", UI.addTodo);
@@ -45,7 +48,7 @@ document.getElementById("todoForm").addEventListener("submit", UI.addTodo);
 document.getElementById('todoCont').addEventListener('click', (e) => {
   if (e.target.classList.contains('delete-btn')) {
     //Store.removeTask(e.target.parentElement.firstChild.nextElementSibling.textContent, todoArr);
-    console.log(e.target.parentElement.previousElementSibling.previousElementSibling.textContent);
+    //console.log(e.target.parentElement.previousElementSibling.previousElementSibling.textContent);
     Store.removeTask(e.target.parentElement.previousElementSibling.previousElementSibling.textContent, todoArr);
     e.target.parentElement.parentElement.remove(); 
  }
@@ -53,6 +56,10 @@ document.getElementById('todoCont').addEventListener('click', (e) => {
 
 document.getElementById("btnForm").addEventListener('click', () => {
   document.getElementById("formCont").classList.toggle('none');
+});
+
+document.getElementById("printArr").addEventListener('click', () => {
+  console.log(todoArr);
 });
 
 export default todoArr;
