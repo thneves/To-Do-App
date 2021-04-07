@@ -1,4 +1,4 @@
-import todoArr from "./index.js";
+//import todoArr from "./index.js";
 
 class Store {
     static tasksFromStorage(arr) {
@@ -16,7 +16,7 @@ class Store {
         });
       
         localStorage.setItem('myTasksStorage', JSON.stringify(arr));
-        console.log(todoArr);
+        //console.log(todoArr);
         return arr;
       }
 }

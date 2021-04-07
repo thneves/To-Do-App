@@ -30,7 +30,6 @@ mainDiv.innerHTML = `
 `;
 
 
-
 if (localStorage.getItem('myTasksStorage') === null) {
     todoArr = [];
   } else {
@@ -38,18 +37,21 @@ if (localStorage.getItem('myTasksStorage') === null) {
     UI.printTask(todoArr);
   }
 
-
   UI.printForm();
 
 // Events
 
-document.getElementById("todoForm").addEventListener("submit", UI.addTodo);
+document.getElementById("todoForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  todoArr.push(UI.addTodo());;
+  Store.tasksFromStorage(todoArr);
+  UI.printTask(todoArr);
+});
 
 document.getElementById('todoCont').addEventListener('click', (e) => {
   if (e.target.classList.contains('delete-btn')) {
     //Store.removeTask(e.target.parentElement.firstChild.nextElementSibling.textContent, todoArr);
-    //console.log(e.target.parentElement.previousElementSibling.previousElementSibling.textContent);
-    Store.removeTask(e.target.parentElement.previousElementSibling.previousElementSibling.textContent, todoArr);
+    todoArr = Store.removeTask(e.target.parentElement.previousElementSibling.previousElementSibling.textContent, todoArr);
     e.target.parentElement.parentElement.remove(); 
  }
 });

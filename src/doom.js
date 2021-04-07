@@ -1,27 +1,22 @@
 import Todo from "./todos.js";
-import todoArr from "./index.js";
-import Store from "./storage.js"
 
 class UI {
-    static addTodo(e) {
+    static addTodo() {
         const form = document.querySelector("#todoForm");
-        e.preventDefault();
-
+        
         const title = document.querySelector("#title");
         const description = document.querySelector("#description");
         const dueDate = document.querySelector("#dueDate");
         const priority = document.querySelector("#priority");
         let newTodo = new Todo(title.value, description.value, dueDate.value, priority.value);
-        todoArr.push(newTodo);
-        Store.tasksFromStorage(todoArr);
-        UI.printTask(todoArr);
         form.reset();
+        return newTodo
     }
 
-    static printTask(list) {
+    static printTask(arr) {
         let todoBody = document.getElementById("todoBody");
         todoBody.innerHTML = '';
-        list.forEach((task, index) => {
+        arr.forEach((task, index) => {
           let taskCard = document.createElement("tr");
           taskCard.innerHTML = 
           `
