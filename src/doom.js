@@ -39,13 +39,15 @@ class UI {
       }
 
       static seeDetails(title, arr) {
-        arr.forEach((item) => {
-          if(item.title === title) {
-            let list = document.getElementsByClassName(`${item.title}`);
-            for (let item of list) {
-              item.classList.toggle('none');
+        arr.forEach((project) => {
+          project.todoList.forEach(item =>{
+            if(item.title === title) {
+              let list = document.getElementsByClassName(`${item.title}`);
+              for (let item of list) {
+                item.classList.toggle('none');
+            }
           }
-          }
+          })
         })
       }
 

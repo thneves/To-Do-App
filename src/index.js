@@ -79,11 +79,6 @@ document.getElementById('projectLits').addEventListener('click', (e) => {
 
 document.getElementById("submitProject").addEventListener("click", addProject);
 
-
-
-
-
-
 if (localStorage.getItem('myTasksStorage') === null) {
     projectArr = [];
   } else {
@@ -91,7 +86,7 @@ if (localStorage.getItem('myTasksStorage') === null) {
     printProjects(projectArr);
   }   
 
-//localStorage.setItem('myTasksStorage', JSON.stringify(todoArr));
+// localStorage.setItem('myTasksStorage', JSON.stringify(projectArr));
 
   UI.printForm();
 
@@ -115,10 +110,13 @@ document.getElementById('todoCont').addEventListener('click', (e) => {
  }
 });
 
+// SEE DETAILS BUTTON
+
 document.getElementById('todoCont').addEventListener('click', (e) => {
   if (e.target.classList.contains('details-btn')) {
-  UI.seeDetails(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent, todoArr);
- }
+  UI.seeDetails(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent, projectArr);
+    console.log(projectArr)
+}
 });
 
 document.getElementById("btnForm").addEventListener('click', () => {
