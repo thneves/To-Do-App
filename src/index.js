@@ -1,6 +1,6 @@
 import './styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap'; 
+import 'bootstrap';
 import "./doom";
 import UI from "./doom";
 import Project from "./projects";
@@ -8,9 +8,10 @@ import Store from './storage';
 
 //let todoArr = [];
 
-//let defaultProject = new Project("Default Project", todoArr);
+// let defaultProject = new Project("Default Project", []);
 
 let projectArr = [];
+
 
 const mainDiv = document.querySelector("#content");
 mainDiv.classList.add('d-flex');
@@ -58,7 +59,7 @@ let addProject = (e) => {
 let printProjects = () => {
   let projectList = document.getElementById("projectLits");
   projectList.innerHTML = '';
-  projectArr.forEach( (project, index) => {
+  projectArr.forEach((project, index) => {
     let li = document.createElement("li");
     li.innerHTML = `
     <a href="#" id="project${index}" class="projectLinks">${project.name}</a>
@@ -70,32 +71,41 @@ let printProjects = () => {
 document.getElementById('projectLits').addEventListener('click', (e) => {
   if (e.target.classList.contains('projectLinks')) {
     projectArr.forEach(project => {
-      if(project.name === e.target.textContent) {
+      if (project.name === e.target.textContent) {
         UI.printTask(project.todoList, project.name);
       }
     })
-  } 
+  }
 });
 
 document.getElementById("submitProject").addEventListener("click", addProject);
 
-if (localStorage.getItem('myTasksStorage') === null) {
-    projectArr = [];
-  } else {
-    projectArr = JSON.parse(localStorage.getItem('myTasksStorage'));
-    printProjects(projectArr);
-  }   
+
+
+if (localStorage.getItem('myTasksStorage') === null || projectArr.length == 0) {
+
+  let defaultProject = new Project("Default", []);
+  projectArr.push(defaultProject);
+  Store.tasksFromStorage(projectArr);
+  printProjects(projectArr);
+  UI.printTask(defaultProject.todoList, defaultProject.name);
+
+} else {
+  console.log('there')
+  projectArr = JSON.parse(localStorage.getItem('myTasksStorage'));
+  printProjects(projectArr);
+}
 
 // localStorage.setItem('myTasksStorage', JSON.stringify(projectArr));
 
-  UI.printForm();
+UI.printForm();
 
 // Events
 
 document.getElementById("todoForm").addEventListener("submit", (e) => {
   e.preventDefault();
   projectArr.forEach(project => {
-    if(project.name === e.target.parentElement.parentElement.firstChild.nextElementSibling.textContent) {
+    if (project.name === e.target.parentElement.parentElement.firstChild.nextElementSibling.textContent) {
       project.todoList.push(UI.addTodo());
       Store.tasksFromStorage(projectArr);
       UI.printTask(project.todoList, project.name);
@@ -103,20 +113,22 @@ document.getElementById("todoForm").addEventListener("submit", (e) => {
   })
 });
 
+// DELETE BUTTON
+
 document.getElementById('todoCont').addEventListener('click', (e) => {
   if (e.target.classList.contains('delete-btn')) {
     projectArr = Store.removeTask(e.target.parentElement.nextElementSibling.textContent, projectArr);
-    e.target.parentElement.parentElement.remove(); 
- }
+    e.target.parentElement.parentElement.remove();
+  }
 });
 
 // SEE DETAILS BUTTON
 
 document.getElementById('todoCont').addEventListener('click', (e) => {
   if (e.target.classList.contains('details-btn')) {
-  UI.seeDetails(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent, projectArr);
+    UI.seeDetails(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent, projectArr);
     console.log(projectArr)
-}
+  }
 });
 
 document.getElementById("btnForm").addEventListener('click', () => {
@@ -126,7 +138,3 @@ document.getElementById("btnForm").addEventListener('click', () => {
 document.getElementById("printArr").addEventListener('click', () => {
   console.log(projectArr);
 });
-
-
-
-
