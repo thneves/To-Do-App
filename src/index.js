@@ -1,24 +1,26 @@
 import './styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap'; 
 import "./doom";
 import UI from "./doom";
 import Project from "./projects";
 import Store from './storage';
 
-let todoArr = ["hola", "hello"];
+//let todoArr = [];
 
-let defaultProject = new Project("Default Project", todoArr);
+//let defaultProject = new Project("Default Project", todoArr);
 
-let projectArr = [defaultProject];
+let projectArr = [];
 
 const mainDiv = document.querySelector("#content");
 mainDiv.classList.add('d-flex');
 mainDiv.innerHTML = `
 <div id="projects" class="w-25">
-<button id="addProject" class="btn btn-primary">+Add</button>
-<ul id="projectLits"></ul>
+  <button id="addProject" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">+Add</button>
+  <ul id="projectLits"></ul>
 </div>
 <div id="todos"class="w-75"> 
+  <h1 id="projectTitle"></h1>
   <div id="todoCont" class="">
     <table class="table" id="todoTable">
       <thead>
@@ -34,6 +36,7 @@ mainDiv.innerHTML = `
     </table>  
   </div>
   <button id="btnForm" class="btn btn-primary">Add +</button>
+  <button id="printArr" class="btn btn-primary">printArr</button>
 </div>
 `;
 
@@ -43,9 +46,12 @@ mainDiv.innerHTML = `
 
 let projects = document.getElementById("projects");
 
-let addProject = () => {
-  let newProject = new Project("Project1", [])
+let addProject = (e) => {
+  e.preventDefault();
+  const projectName = document.getElementById("projectName");
+  let newProject = new Project(projectName.value, [])
   projectArr.push(newProject);
+  Store.tasksFromStorage(projectArr);
   printProjects();
 }
 
@@ -62,18 +68,16 @@ let printProjects = () => {
 }
 
 document.getElementById('projectLits').addEventListener('click', (e) => {
-  //console.log(e.target.textContent);
   if (e.target.classList.contains('projectLinks')) {
     projectArr.forEach(project => {
       if(project.name === e.target.textContent) {
-        console.log(project.todoList);
-        UI.printTask(project.todoList);
+        UI.printTask(project.todoList, project.name);
       }
     })
   } 
 });
 
-document.getElementById("addProject").addEventListener("click", addProject);
+document.getElementById("submitProject").addEventListener("click", addProject);
 
 
 
@@ -81,11 +85,13 @@ document.getElementById("addProject").addEventListener("click", addProject);
 
 
 if (localStorage.getItem('myTasksStorage') === null) {
-    todoArr = [];
+    projectArr = [];
   } else {
-    todoArr = JSON.parse(localStorage.getItem('myTasksStorage'));
-    UI.printTask(todoArr);
-  }
+    projectArr = JSON.parse(localStorage.getItem('myTasksStorage'));
+    printProjects(projectArr);
+  }   
+
+//localStorage.setItem('myTasksStorage', JSON.stringify(todoArr));
 
   UI.printForm();
 
@@ -93,14 +99,18 @@ if (localStorage.getItem('myTasksStorage') === null) {
 
 document.getElementById("todoForm").addEventListener("submit", (e) => {
   e.preventDefault();
-  todoArr.push(UI.addTodo());
-  Store.tasksFromStorage(todoArr);
-  UI.printTask(todoArr);
+  projectArr.forEach(project => {
+    if(project.name === e.target.parentElement.parentElement.firstChild.nextElementSibling.textContent) {
+      project.todoList.push(UI.addTodo());
+      Store.tasksFromStorage(projectArr);
+      UI.printTask(project.todoList, project.name);
+    }
+  })
 });
 
 document.getElementById('todoCont').addEventListener('click', (e) => {
   if (e.target.classList.contains('delete-btn')) {
-    todoArr = Store.removeTask(e.target.parentElement.nextElementSibling.textContent, todoArr);
+    projectArr = Store.removeTask(e.target.parentElement.nextElementSibling.textContent, projectArr);
     e.target.parentElement.parentElement.remove(); 
  }
 });
@@ -115,7 +125,10 @@ document.getElementById("btnForm").addEventListener('click', () => {
   document.getElementById("formCont").classList.toggle('none');
 });
 
-export default todoArr;
+document.getElementById("printArr").addEventListener('click', () => {
+  console.log(projectArr);
+});
+
 
 
 

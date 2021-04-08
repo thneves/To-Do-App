@@ -13,7 +13,12 @@ class UI {
         return newTodo
     }
 
-    static printTask(arr) {
+    static printTask(arr, projectName) {
+
+        let name = document.getElementById("projectTitle");
+        name.innerHTML = "";
+        name.innerHTML = projectName;
+
         let todoBody = document.getElementById("todoBody");
         todoBody.innerHTML = '';
         arr.forEach((task, index) => {
