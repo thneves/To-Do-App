@@ -11,7 +11,6 @@ let projectArr = [];
 UI.printHome();
 
 if (localStorage.getItem('myTasksStorage') === null && projectArr.length == 0) {
-
   let defaultProject = new Project("Today", []);
   projectArr.push(defaultProject);
   Store.tasksFromStorage(projectArr);
@@ -36,6 +35,7 @@ document.getElementById("todoForm").addEventListener("submit", (e) => {
       UI.printTask(project.todoList, project.name);
     }
   })
+  document.getElementById("formCont").classList.toggle('none');
 });
 
 // DELETE BUTTONS

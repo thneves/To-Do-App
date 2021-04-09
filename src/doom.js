@@ -27,7 +27,7 @@ class UI {
           taskCard.innerHTML = 
           `
             <th scope="row">${index + 1}</th>
-            <td><button class="delete-btn btn-danger rounded border-2">DONE</button></td>
+            <td><button class="delete-btn btn-light rounded border-2">&#x2713</button></td>
             <td>${task.title}</td>
             <td>${task.dueDate}</td>
             <td  class="none ${task.title}">${task.description}</td>
@@ -35,6 +35,13 @@ class UI {
             <td><button class="details-btn btn-secondary rounded border border-3">See details</button></td>
             
           `;
+          if (task.priority === 'low') {
+            taskCard.classList.add('low')
+          } else if ( task.priority === 'medium') {
+            taskCard.classList.add('medium')
+          } else {
+            taskCard.classList.add('high')
+          }
           todoBody.appendChild(taskCard);
         });
       }
@@ -91,8 +98,8 @@ class UI {
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Status</th>
-                  <th>Title</th>
+                  <th>Complete</th>
+                  <th>Task</th>
                   <th>Due Date</th>
                   <th>Description</th>
                   <th>Priority</th>
@@ -102,7 +109,7 @@ class UI {
               </tbody>
             </table>  
           </div>
-          <button id="btnForm" class="btn btn-primary">Add New Task+</button>
+          <button id="btnForm" class="btn btn-primary">Add New Task +</button>
           <button id="printArr" class="btn btn-primary">printArr</button>
 
           <!--TODO FORM-->
@@ -117,7 +124,7 @@ class UI {
               <label for="priority" class="form-label mt-1">Priority</label>
               <select id="priority" name="priority" class="form-control" required>
                 <option value="low">Low</option>
-                <option value="mid">Medium</option>
+                <option value="medium">Medium</option>
                 <option value="high">High</option>
               </select>
               <input type="submit" id="submit-btn" value="Create New Task" class="btn btn-primary mt-3">
@@ -146,7 +153,7 @@ class UI {
                   </div>
                   <div class="form-group">
                       <div>
-                          <button type="submit" class="btn btn-info btn-block">Create Prject</button>
+                          <button type="submit" class="btn btn-info btn-block">Create Project</button>
                       </div>
                   </div>
               </form>

@@ -14,3 +14,16 @@
 .show {
   display: block;
 }
+
+.high {
+  background-color: rgba(184, 8, 8, 0.6);
+  
+}
+
+.medium {
+  background-color: rgba(245, 209, 3, 0.3);
+}
+
+.low {
+  background-color: rgba(58, 240, 58, 0.233)
+}
