@@ -62,11 +62,15 @@ class UI {
         let projectList = document.getElementById("projectLits");
         projectList.innerHTML = '';
         arr.forEach((project, index) => {
+      
           let li = document.createElement("li");
           li.innerHTML = `
           <a href="#" id="project${index}" class="projectLinks">${project.name}</a>
+          <button class="delete-project btn-danger" id="deleteBtnProject${index}">X</button>
           `;
+      
           projectList.appendChild(li);
+          document.getElementById("deleteBtnProject0").classList.add('none');
         })
       }
 

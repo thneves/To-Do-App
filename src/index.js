@@ -25,7 +25,7 @@ if (localStorage.getItem('myTasksStorage') === null && projectArr.length == 0) {
 
 UI.printTask(projectArr[0].todoList, projectArr[0].name);
 
-// Events
+// EVENTS
 
 document.getElementById("todoForm").addEventListener("submit", (e) => {
   e.preventDefault();
@@ -38,12 +38,19 @@ document.getElementById("todoForm").addEventListener("submit", (e) => {
   })
 });
 
-// DELETE BUTTON
+// DELETE BUTTONS
 
 document.getElementById('todoCont').addEventListener('click', (e) => {
   if (e.target.classList.contains('delete-btn')) {
     projectArr = Store.removeTask(e.target.parentElement.nextElementSibling.textContent, projectArr);
     e.target.parentElement.parentElement.remove();
+  }
+});
+
+document.getElementById('projects').addEventListener('click', (e) => {
+  if (e.target.classList.contains('delete-project')) {
+    projectArr = Store.removeProject(e.target.previousElementSibling.textContent, projectArr)
+    e.target.parentElement.remove();
   }
 });
 
@@ -64,7 +71,6 @@ document.getElementById("printArr").addEventListener('click', () => {
 });
 
 document.getElementById("projectForm").addEventListener("submit", (e) => {
-  //e.preventDefault();
   projectArr.push(UI.addProject());
   Store.tasksFromStorage(projectArr);
   UI.printProjects(projectArr);
