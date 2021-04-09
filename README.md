@@ -1,14 +1,18 @@
-# To-Do-App
+![](https://img.shields.io/badge/Microverse-blueviolet)
 
-Web app for storing books. Users can add and delete books to the Library, also change the status of the book in case if it was read or not. Books are displayed in the form
-of cards. Each book contain its title, author's name, number of pages, and read status.
+# To Do App
+
+Web app for creating to-do lists. Each to-do has a task, description, due date and priority. The to-do list belong to a project. The user
+can create and delete different projects to store different lists. After a task is done the user can mark it, and take it off the list. App
+created using Javascript Classes, Modules and Webpack. 
 
 ![screenshot](/screenshot.png)
 
 ## Built With
 
-- Bootstrap
 - Javascript
+- Webpack
+- Bootstrap
 
 ## Live Demo
 
@@ -28,13 +32,15 @@ To get a local copy up and running follow these simple example steps.
 **STEP 1**
 In the terminal, Run the following commands.
 
-- `git clone git@github.com:AlanSoto31/Library.git`
-- `cd Library-JS`
+- `git clone git@github.com:thneves/To-Do-App.git`
+- `cd To-Do-App`
 
 **STEP 2**
 
-- Then open the `index.html` file using a browser.
-- Enjoy the simple library.
+- Open the terminal inside the app folder
+- Run `npm install`
+- Run `npm run build`
+- Then `npm run start` to open the app
 
 ## Authors
 
@@ -54,7 +60,7 @@ In the terminal, Run the following commands.
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page]((https://github.com/AlanSoto31/Library/issues)).
+Feel free to check the [issues page]((https://github.com/AlanSoto31/To-Do-App/issues)).
 
 ## Show your support
 
