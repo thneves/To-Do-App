@@ -27,12 +27,12 @@ class UI {
           taskCard.innerHTML = 
           `
             <th scope="row">${index + 1}</th>
-            <td><button class="delete-btn btn-danger">DONE</button></td>
+            <td><button class="delete-btn btn-danger rounded border-2">DONE</button></td>
             <td>${task.title}</td>
             <td>${task.dueDate}</td>
             <td  class="none ${task.title}">${task.description}</td>
             <td  class="none ${task.title}">${task.priority}</td>
-            <td><button class="details-btn btn-secondary">See details</button></td>
+            <td><button class="details-btn btn-secondary rounded border border-3">See details</button></td>
             
           `;
           todoBody.appendChild(taskCard);
@@ -78,7 +78,7 @@ class UI {
           <button id="addProject" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">+Add</button>
           <ul id="projectLits"></ul>
         </div>
-        <div id="todos"class="w-75"> 
+        <div id="todos"class="w-75 ml-5 mt-3"> 
           <h1 id="projectTitle"></h1>
           
           <!--TODO TABLE-->
@@ -90,31 +90,33 @@ class UI {
                   <th>Status</th>
                   <th>Title</th>
                   <th>Due Date</th>
+                  <th>Description</th>
+                  <th>Priority</th>
                 </tr>
               </thead>
               <tbody id="todoBody">
               </tbody>
             </table>  
           </div>
-          <button id="btnForm" class="btn btn-primary">Add +</button>
+          <button id="btnForm" class="btn btn-primary">Add New Task+</button>
           <button id="printArr" class="btn btn-primary">printArr</button>
 
           <!--TODO FORM-->
           <div id="formCont" class="none">
-            <form action="/" class="d-flex flex-column w-25 mx-auto" id="todoForm">
-              <label for="title" class="form-label">Title</label>
+            <form action="/" class="d-flex flex-column w-25 mx-auto border border-2 rounded border-primary p-3" id="todoForm">
+              <label for="title" class="form-label mt-1">Task</label>
               <input type="text" id="title" class="form-control" required>
-              <label for="description" class="form-label">Description</label>
+              <label for="description" class="form-label mt-1">Description</label>
               <input type="text" id="description" class="form-control" required>
-              <label for="dueDate" class="form-label">Due Date</label>
+              <label for="dueDate" class="form-label mt-1">Due Date</label>
               <input type="date" id="dueDate" class="form-control" required>
-              <label for="priority" class="form-label">Priority</label>
+              <label for="priority" class="form-label mt-1">Priority</label>
               <select id="priority" name="priority" class="form-control" required>
-                <option value="low">low</option>
-                <option value="mid">Mid</option>
+                <option value="low">Low</option>
+                <option value="mid">Medium</option>
                 <option value="high">High</option>
               </select>
-              <input type="submit" id="submit-btn" value="Create a new To Do" class="btn btn-primary">
+              <input type="submit" id="submit-btn" value="Create New Task" class="btn btn-primary mt-3">
             </form> 
           </div>
         </div>
