@@ -1,31 +1,29 @@
-import Todo from "./todos.js";
-import Project from "./projects"
+import Todo from './todos';
+import Project from './projects';
 
 class UI {
-    static addTodo() {
-        const form = document.querySelector("#todoForm");
-        
-        const title = document.querySelector("#title");
-        const description = document.querySelector("#description");
-        const dueDate = document.querySelector("#dueDate");
-        const priority = document.querySelector("#priority");
-        let newTodo = new Todo(title.value, description.value, dueDate.value, priority.value);
-        form.reset();
-        return newTodo
-    }
+  static addTodo() {
+    const form = document.querySelector('#todoForm');
 
-    static printTask(arr, projectName) {
+    const title = document.querySelector('#title');
+    const description = document.querySelector('#description');
+    const dueDate = document.querySelector('#dueDate');
+    const priority = document.querySelector('#priority');
+    const newTodo = new Todo(title.value, description.value, dueDate.value, priority.value);
+    form.reset();
+    return newTodo;
+  }
 
-        let name = document.getElementById("projectTitle");
-        name.innerHTML = "";
-        name.innerHTML = projectName;
+  static printTask(arr, projectName) {
+    const name = document.getElementById('projectTitle');
+    name.innerHTML = '';
+    name.innerHTML = projectName;
 
-        let todoBody = document.getElementById("todoBody");
-        todoBody.innerHTML = '';
-        arr.forEach((task, index) => {
-          let taskCard = document.createElement("tr");
-          taskCard.innerHTML = 
-          `
+    const todoBody = document.getElementById('todoBody');
+    todoBody.innerHTML = '';
+    arr.forEach((task, index) => {
+      const taskCard = document.createElement('tr');
+      taskCard.innerHTML = `
             <th scope="row">${index + 1}</th>
             <td><button class="delete-btn btn-light rounded border-2">&#x2713</button></td>
             <td>${task.title}</td>
@@ -35,61 +33,61 @@ class UI {
             <td><button class="details-btn btn-secondary rounded border border-3">See details</button></td>
             
           `;
-          if (task.priority === 'low') {
-            taskCard.classList.add('low')
-          } else if ( task.priority === 'medium') {
-            taskCard.classList.add('medium')
-          } else {
-            taskCard.classList.add('high')
-          }
-          todoBody.appendChild(taskCard);
-        });
+      if (task.priority === 'low') {
+        taskCard.classList.add('low');
+      } else if (task.priority === 'medium') {
+        taskCard.classList.add('medium');
+      } else {
+        taskCard.classList.add('high');
       }
+      todoBody.appendChild(taskCard);
+    });
+  }
 
-      static seeDetails(title, arr) {
-        arr.forEach((project) => {
-          project.todoList.forEach(item =>{
-            if(item.title === title) {
-              let list = document.getElementsByClassName(`${item.title}`);
-              for (let item of list) {
-                item.classList.toggle('none');
-            }
-          }
-          })
-        })
-      }
+  static seeDetails(title, arr) {
+    arr.forEach((project) => {
+      project.todoList.forEach((item) => {
+        if (item.title === title) {
+          const list = document.getElementsByClassName(`${item.title}`);
+          const tdArr = [...list];
+          tdArr.forEach((item) => {
+            item.classList.toggle('none');
+          });
+        }
+      });
+    });
+  }
 
-      static addProject() {
-        const projectName = document.getElementById("projectName");
-        let newProject = new Project(projectName.value, [])
-        return newProject
-      }
+  static addProject() {
+    const projectName = document.getElementById('projectName');
+    const newProject = new Project(projectName.value, []);
+    return newProject;
+  }
 
-      static printProjects(arr) {
-        let projectList = document.getElementById("projectLits");
-        projectList.innerHTML = '';
-        arr.forEach((project, index) => {
-      
-          let li = document.createElement("li");
-          li.classList.add('list-group-item');
-          li.setAttribute("id", `li${index}`);
-          li.innerHTML = `
+  static printProjects(arr) {
+    const projectList = document.getElementById('projectLits');
+    projectList.innerHTML = '';
+    arr.forEach((project, index) => {
+      const li = document.createElement('li');
+      li.classList.add('list-group-item');
+      li.setAttribute('id', `li${index}`);
+      li.innerHTML = `
           <div class="d-flex justify-content-between align-items-center">
             <a href="#" id="project${index}" class="projectLinks">${project.name}</a>
             <button class="delete-project btn-danger" id="deleteBtnProject${index}">X</button>
           </div>
           `;
-      
-          projectList.appendChild(li);
-          document.getElementById("li0").classList.add('active');
-          document.getElementById("deleteBtnProject0").classList.add('none');
-        })
-      }
 
-      static printHome() {
-        const mainDiv = document.querySelector("#content");
-        mainDiv.classList.add('d-flex');
-        mainDiv.innerHTML = `
+      projectList.appendChild(li);
+      document.getElementById('li0').classList.add('active');
+      document.getElementById('deleteBtnProject0').classList.add('none');
+    });
+  }
+
+  static printHome() {
+    const mainDiv = document.querySelector('#content');
+    mainDiv.classList.add('d-flex');
+    mainDiv.innerHTML = `
         <div id="projects" class="w-25">
           <div class="m-3 d-flex justify-content-between align-items-center">
             <h2>Projects</h2>
@@ -118,7 +116,6 @@ class UI {
             </table>  
           </div>
           <button id="btnForm" class="btn btn-primary">Add New Task +</button>
-          <button id="printArr" class="btn btn-primary">printArr</button>
 
           <!--TODO FORM-->
           <div id="formCont" class="none">
@@ -170,8 +167,7 @@ class UI {
         </div>
       </div>
         `;
-
-      }
+  }
 }
 
 export default UI;
