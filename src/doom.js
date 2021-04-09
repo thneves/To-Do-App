@@ -71,12 +71,17 @@ class UI {
         arr.forEach((project, index) => {
       
           let li = document.createElement("li");
+          li.classList.add('list-group-item');
+          li.setAttribute("id", `li${index}`);
           li.innerHTML = `
-          <a href="#" id="project${index}" class="projectLinks">${project.name}</a>
-          <button class="delete-project btn-danger" id="deleteBtnProject${index}">X</button>
+          <div class="d-flex justify-content-between align-items-center">
+            <a href="#" id="project${index}" class="projectLinks">${project.name}</a>
+            <button class="delete-project btn-danger" id="deleteBtnProject${index}">X</button>
+          </div>
           `;
       
           projectList.appendChild(li);
+          document.getElementById("li0").classList.add('active');
           document.getElementById("deleteBtnProject0").classList.add('none');
         })
       }
@@ -86,8 +91,11 @@ class UI {
         mainDiv.classList.add('d-flex');
         mainDiv.innerHTML = `
         <div id="projects" class="w-25">
-          <button id="addProject" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">+Add</button>
-          <ul id="projectLits"></ul>
+          <div class="m-3 d-flex justify-content-between align-items-center">
+            <h2>Projects</h2>
+            <button id="addProject" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">+ Add</button>
+          </div>
+          <ul id="projectLits" class="p-3 list-group"></ul>
         </div>
         <div id="todos"class="w-75 ml-5 mt-3"> 
           <h1 id="projectTitle"></h1>
@@ -137,7 +145,7 @@ class UI {
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Project Name</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -146,7 +154,7 @@ class UI {
               <form role="form" action="/" id="projectForm">
                   <input type="hidden" name="_token" value="">
                   <div class="form-group">
-                      <label class="control-label">Project Name</label>
+
                       <div>
                           <input type="text" class="form-control input-lg" name="password" id="projectName" required>
                       </div>

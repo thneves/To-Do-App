@@ -50,7 +50,7 @@ document.getElementById('todoCont').addEventListener('click', (e) => {
 document.getElementById('projects').addEventListener('click', (e) => {
   if (e.target.classList.contains('delete-project')) {
     projectArr = Store.removeProject(e.target.previousElementSibling.textContent, projectArr)
-    e.target.parentElement.remove();
+    e.target.parentElement.parentElement.remove();
   }
 });
 
