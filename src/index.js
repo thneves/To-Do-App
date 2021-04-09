@@ -8,37 +8,11 @@ import Store from './storage';
 
 let projectArr = [];
 
-const mainDiv = document.querySelector("#content");
-mainDiv.classList.add('d-flex');
-mainDiv.innerHTML = `
-<div id="projects" class="w-25">
-  <button id="addProject" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">+Add</button>
-  <ul id="projectLits"></ul>
-</div>
-<div id="todos"class="w-75"> 
-  <h1 id="projectTitle"></h1>
-  <div id="todoCont" class="">
-    <table class="table" id="todoTable">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Status</th>
-          <th>Title</th>
-          <th>Due Date</th>
-        </tr>
-      </thead>
-      <tbody id="todoBody">
-      </tbody>
-    </table>  
-  </div>
-  <button id="btnForm" class="btn btn-primary">Add +</button>
-  <button id="printArr" class="btn btn-primary">printArr</button>
-</div>
-`;
+UI.printHome();
 
 if (localStorage.getItem('myTasksStorage') === null && projectArr.length == 0) {
 
-  let defaultProject = new Project("Default", []);
+  let defaultProject = new Project("Today", []);
   projectArr.push(defaultProject);
   Store.tasksFromStorage(projectArr);
   UI.printProjects(projectArr);
@@ -49,7 +23,6 @@ if (localStorage.getItem('myTasksStorage') === null && projectArr.length == 0) {
   UI.printProjects(projectArr);
 }
 
-UI.printForm();
 UI.printTask(projectArr[0].todoList, projectArr[0].name);
 
 // Events
@@ -90,8 +63,8 @@ document.getElementById("printArr").addEventListener('click', () => {
   console.log(projectArr);
 });
 
-document.getElementById("submitProject").addEventListener("click", (e) => {
-  e.preventDefault();
+document.getElementById("projectForm").addEventListener("submit", (e) => {
+  //e.preventDefault();
   projectArr.push(UI.addProject());
   Store.tasksFromStorage(projectArr);
   UI.printProjects(projectArr);
