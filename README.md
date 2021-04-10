@@ -16,7 +16,7 @@ created using Javascript Classes, Modules and Webpack.
 
 ## Live Demo
 
-[Live Demo Link](https://alansoto31.github.io/Library/)
+[Live Demo Link](https://thneves.github.io/To-Do-App/)
 
 ## Getting Started
 
