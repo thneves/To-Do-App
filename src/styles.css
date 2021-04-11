@@ -1,0 +1,42 @@
+#projects {
+  height: 100vh;
+  background-color: rgb(235, 227, 227);
+}
+
+.none {
+  display: none;
+}
+
+.card {
+  width: 300px;
+}
+
+.show {
+  display: block;
+}
+
+.high {
+  background-color: rgba(184, 8, 8, 0.6);
+}
+
+.medium {
+  background-color: rgba(245, 209, 3, 0.3);
+}
+
+.low {
+  background-color: rgba(58, 240, 58, 0.233);
+}
+
+.projectLinks {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+}
+
+#li0 a {
+  color: white;
+}
+
+ul {
+  list-style: none;
+}
