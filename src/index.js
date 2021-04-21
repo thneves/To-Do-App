@@ -2,7 +2,6 @@ import './styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import UI from './doom';
-
 import Project from './projects';
 import Store from './storage';
 
