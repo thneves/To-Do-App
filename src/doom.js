@@ -18,7 +18,6 @@ class UI {
     const name = document.getElementById('projectTitle');
     name.innerHTML = '';
     name.innerHTML = projectName;
-
     const todoBody = document.getElementById('todoBody');
     todoBody.innerHTML = '';
     arr.forEach((task, index) => {
@@ -30,18 +29,21 @@ class UI {
             <td>${task.dueDate}</td>
             <td  class="none ${task.title}">${task.description}</td>
             <td  class="none ${task.title}">${task.priority}</td>
-            <td><button class="details-btn btn-secondary rounded border border-3">See details</button></td>
-            
-          `;
-      if (task.priority === 'low') {
-        taskCard.classList.add('low');
-      } else if (task.priority === 'medium') {
-        taskCard.classList.add('medium');
-      } else {
-        taskCard.classList.add('high');
-      }
+            <td><button class="details-btn btn-secondary rounded border border-3">See details</button></td>          `;
+      let prior = UI.setPriority(task);
+      taskCard.classList.add(prior);
       todoBody.appendChild(taskCard);
     });
+  }
+  
+  static setPriority(task) {
+    if (task.priority === 'low') {
+      return "low"
+    } else if (task.priority === 'medium') {
+      return "medium"
+    } else {
+      return "high"
+    }
   }
 
   static seeDetails(title, arr) {
