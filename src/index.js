@@ -43,6 +43,7 @@ document.getElementById('todoCont').addEventListener('click', (e) => {
   if (e.target.classList.contains('delete-btn')) {
     projectArr = Store.removeTask(e.target.parentElement.nextElementSibling
       .textContent, projectArr);
+    Store.tasksFromStorage(projectArr);
     e.target.parentElement.parentElement.remove();
   }
 });
@@ -50,6 +51,8 @@ document.getElementById('todoCont').addEventListener('click', (e) => {
 document.getElementById('projects').addEventListener('click', (e) => {
   if (e.target.classList.contains('delete-project')) {
     projectArr = Store.removeProject(e.target.previousElementSibling.textContent, projectArr);
+    Store.tasksFromStorage(projectArr);
+    UI.printTask(projectArr[0].todoList, projectArr[0].name);
     e.target.parentElement.parentElement.remove();
   }
 });
