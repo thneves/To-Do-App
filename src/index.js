@@ -86,9 +86,7 @@ document.getElementById('projectLits').addEventListener('click', (e) => {
   }
 });
 
-const capString = (str) => {
-  return str[0].toUpperCase() + str.slice(1);;
-}
+const capString = (str) => str[0].toUpperCase() + str.slice(1);
 
 
 module.exports = capString;
