@@ -24,8 +24,16 @@ test('Delete the right project', () => {
   });
 });
 
+test('Passing the right amount of arguments to delete a Project', () => {
+  expect(() => Store.removeProject('project1')).toThrow();
+});
+
 test('Delete the right todo', () => {
   expect(Store.removeTask('todo2', arr)).not.toContain({
     title: 'todo2', description: 'des2', dueDate: '2021-04-30', priority: 'high',
   });
+});
+
+test('Passing the right amount of arguments to delete a Todo', () => {
+  expect(() => Store.removeTask('todo2')).toThrow();
 });

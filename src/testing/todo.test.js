@@ -1,9 +1,18 @@
 import Todo from '../todos';
 
-test('Check Todos object´s key-value', () => {
-  const obj = new Todo('one', 'one', '06/05/21', 'low');
-  expect(obj.title).toBe('one');
-  expect(obj.description).toBe('one');
-  expect(obj.dueDate).toBe('06/05/21');
-  expect(obj.priority).toBe('low');
+let todo;
+
+beforeEach(() => {
+  todo = new Todo('one', 'one', '06/05/21', 'low');
+});
+
+test("Check todo object's key-values", () => {
+  expect(todo.title).toBe('one');
+  expect(todo.description).toBe('one');
+  expect(todo.dueDate).toBe('06/05/21');
+  expect(todo.priority).toBe('low');
+});
+
+test('Create a project object', () => {
+  expect(todo).toBeInstanceOf(Todo);
 });

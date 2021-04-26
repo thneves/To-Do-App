@@ -1,7 +1,16 @@
 import Project from '../projects';
 
+let project;
+
+beforeEach(() => {
+  project = new Project('project1', []);
+});
+
 test("Check Project object's key-values", () => {
-  const obj = new Project('project', []);
-  expect(obj.name).toBe('project');
-  expect(obj.todoList).toEqual([]);
+  expect(project.name).toBe('project1');
+  expect(project.todoList).toEqual([]);
+});
+
+test('Create a Project object', () => {
+  expect(project).toBeInstanceOf(Project);
 });
