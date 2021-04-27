@@ -18,7 +18,6 @@ class UI {
     const name = document.getElementById('projectTitle');
     name.innerHTML = '';
     name.innerHTML = projectName;
-
     const todoBody = document.getElementById('todoBody');
     todoBody.innerHTML = '';
     arr.forEach((task, index) => {
@@ -28,34 +27,38 @@ class UI {
             <td><button class="delete-btn btn-light rounded border-2">&#x2713</button></td>
             <td>${task.title}</td>
             <td>${task.dueDate}</td>
-            <td  class="none ${task.title}">${task.description}</td>
-            <td  class="none ${task.title}">${task.priority}</td>
-            <td><button class="details-btn btn-secondary rounded border border-3">See details</button></td>
-            
-          `;
-      if (task.priority === 'low') {
-        taskCard.classList.add('low');
-      } else if (task.priority === 'medium') {
-        taskCard.classList.add('medium');
-      } else {
-        taskCard.classList.add('high');
-      }
+            <td  class="none des" id="${task.title}1">${task.description}</td>
+            <td  class="none pri" id="${task.title}2">${task.priority}</td>
+            <td><button class="details-btn btn-secondary rounded border border-3">See details</button></td>          `;
+      const prior = UI.setPriority(task);
+      taskCard.classList.add(prior);
       todoBody.appendChild(taskCard);
     });
   }
 
+  static setPriority(task) {
+    if (task.priority === 'low') {
+      return 'low';
+    } if (task.priority === 'medium') {
+      return 'medium';
+    }
+    return 'high';
+  }
+
   static seeDetails(title, arr) {
+    let des; let
+      pri;
     arr.forEach((project) => {
       project.todoList.forEach((item) => {
         if (item.title === title) {
-          const list = document.getElementsByClassName(`${item.title}`);
-          const tdArr = [...list];
-          tdArr.forEach((item) => {
-            item.classList.toggle('none');
-          });
+          des = document.getElementById(`${item.title}1`);
+          pri = document.getElementById(`${item.title}2`);
+          des.classList.toggle('none');
+          pri.classList.toggle('none');
         }
       });
     });
+    return des;
   }
 
   static addProject() {

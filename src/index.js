@@ -2,7 +2,6 @@ import './styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import UI from './doom';
-
 import Project from './projects';
 import Store from './storage';
 
@@ -44,6 +43,7 @@ document.getElementById('todoCont').addEventListener('click', (e) => {
   if (e.target.classList.contains('delete-btn')) {
     projectArr = Store.removeTask(e.target.parentElement.nextElementSibling
       .textContent, projectArr);
+    Store.tasksFromStorage(projectArr);
     e.target.parentElement.parentElement.remove();
   }
 });
@@ -51,6 +51,8 @@ document.getElementById('todoCont').addEventListener('click', (e) => {
 document.getElementById('projects').addEventListener('click', (e) => {
   if (e.target.classList.contains('delete-project')) {
     projectArr = Store.removeProject(e.target.previousElementSibling.textContent, projectArr);
+    Store.tasksFromStorage(projectArr);
+    UI.printTask(projectArr[0].todoList, projectArr[0].name);
     e.target.parentElement.parentElement.remove();
   }
 });
@@ -83,3 +85,8 @@ document.getElementById('projectLits').addEventListener('click', (e) => {
     });
   }
 });
+
+const capString = (str) => str[0].toUpperCase() + str.slice(1);
+
+
+module.exports = capString;
